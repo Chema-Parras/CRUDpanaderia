@@ -31,12 +31,12 @@ Route::get('/', function () {
 // Route::get('/panadero/create',[PanaderoController::class.'create']);
 // Route::get('/pan/create',[PanController::class.'create']);
 
-Route::resource('panadero',PanaderoController::class);
+Route::resource('panadero',PanaderoController::class)->middleware('auth');
 Route::resource('pan',PanController::class);
 
 
 
-Auth::routes();
+Auth::routes(['register'=>false,'reset'=>false]);
 
 Route::get('/home', [PanaderoController::class, 'index'])->name('home');
 

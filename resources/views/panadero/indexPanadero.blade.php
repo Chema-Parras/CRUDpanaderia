@@ -8,8 +8,9 @@
 @if(Session::has('mensaje'))
 {{Session::get('mensaje')}}
 @endif
-<a href="{{url('panadero/create')}}">Registrar nuevo panadero</a>
-
+<a href="{{url('panadero/create')}}" class="btn btn-success">Registrar nuevo panadero</a>
+<br/>
+<br/>
 <table class="table table-dark">
     <thead class="thead-dark">
         <tr>
@@ -46,15 +47,15 @@
 
         <td>{{$panadero->CodPostal}}</td>
         <td>
-        <a href="{{url('/panadero/'.$panadero->id_Panadero.'/edit')}}">
+        <a href="{{url('/panadero/'.$panadero->id_Panadero.'/edit')}}" class="btn btn-warning">
         Editar
         </a>
         | 
 
-        <form action="{{url('/panadero/'.$panadero->id_Panadero)}}" method="post">
+        <form action="{{url('/panadero/'.$panadero->id_Panadero)}}" class="d-inline" method="post">
         @csrf
         {{ method_field ('DELETE')}}
-        <input type="submit" onclick="return confirm('¿Quieres borrar de verdad de la buena?')" value="Borrar">
+        <input class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar de verdad de la buena?')" value="Borrar">
 
         </form>
         </td>

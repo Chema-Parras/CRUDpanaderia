@@ -7,8 +7,9 @@
 @if(Session::has('mensaje'))
 {{Session::get('mensaje')}}
 @endif
-<a href="{{url('pan/create')}}">Registrar nuevo Pan rico rico.</a>
-
+<a href="{{url('pan/create')}}"class="btn btn-success">Registrar nuevo Pan rico rico.</a>
+<br/>
+<br/>
 <table class="table table-dark">
     <thead class="thead-dark">
         <tr>
@@ -33,24 +34,24 @@
             <td>{{$pan->FechaHecho}}</td>
 
             <td>
-            <img src="{{asset('storage').'/'.$pan->Foto}}" width="100" alt="">
+            <img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$pan->Foto}}" width="100" alt="">
             
             </td>
 
             <td>{{$pan->Coste}}</td>
             <td>{{$pan->Panadero_id}}</td>
             <td>
-                 <a href="{{url('/pan/'.$pan->id_Pan.'/edit')}}" width="100" alt="">
+                 <a href="{{url('/pan/'.$pan->id_Pan.'/edit')}}" width="100" alt="" class="btn btn-warning">
                 Editar
                  </a>
             
              |
             
             
-                <form action="{{url('/pan/'.$pan->id_Pan)}}" method="post">
+                <form action="{{url('/pan/'.$pan->id_Pan)}}" class="d-inline"method="post">
                 @csrf
                 {{method_field('DELETE')}}
-                <input type="submit" onclick="return confirm('¿Quieres borrar de verdad de la buena?')" value="Borrar">
+                <input class="btn btn-danger" type="submit" onclick="return confirm('¿Quieres borrar de verdad de la buena?')" value="Borrar">
                 </form>
              </td>
         </tr>

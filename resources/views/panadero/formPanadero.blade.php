@@ -1,5 +1,7 @@
 <h1>{{$modo}} Panadero</h1>
 
+<div class"""></div>
+
 <label for="Nombre">Nombre</label>
 <input type="text" name="Nombre" value="{{isset($panadero->Nombre)?$panadero->Nombre:''}}" id="Nombre"><br>
 
