@@ -54,6 +54,7 @@ class PanaderoController extends Controller
             'required'=>'El :attribute es un atributo'
             
         ];
+        $this->validate($request, $campos, $mensaje);
 
 
         $datosPanadero = request()->except('_token');

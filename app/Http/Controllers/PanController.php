@@ -56,6 +56,7 @@ class PanController extends Controller
             'required'=>'El :attribute es un atributo',
             'Foto.required'=>'La foto es requerida'
         ];
+        $this->validate($request, $campos, $mensaje);
 
 
         $datosPan = request()->except('_token');
