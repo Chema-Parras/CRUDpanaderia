@@ -1,3 +1,8 @@
+<a href="{{url('panadero/create')}}">Registrar nuevo panadero</a>
+@if(Session::has('mensaje'))
+{{Session::get('mensaje')}}
+@endif
+
 <table class="table table-dark">
     <thead class="thead-dark">
         <tr>

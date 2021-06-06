@@ -1,5 +1,10 @@
-b-5<table class="table table-dark">
-    <thead class="thead-dark">
+<a href="{{url('pan/create')}}">Registrar nuevo Pan rico rico.</a>
+@if(Session::has('mensaje'))
+{{Session::get('mensaje')}}
+@endif
+
+<table class="table table-light">
+    <thead class="thead-light">
         <tr>
             <th>#</th>
             <th>Nombre</th>
@@ -22,7 +27,7 @@ b-5<table class="table table-dark">
             <td>{{$pan->FechaHecho}}</td>
 
             <td>
-            <img src="{{asset('storage').'/'.$pan->Foto}}" alt="">
+            <img src="{{asset('storage').'/'.$pan->Foto}}" width="100" alt="">
             
             </td>
 

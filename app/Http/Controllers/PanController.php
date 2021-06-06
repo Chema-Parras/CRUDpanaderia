@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\pan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PanController extends Controller
 {
@@ -15,9 +16,9 @@ class PanController extends Controller
     public function index()
     {
         //
-        $datosPan['pan']=pan::paginate(5);
+        $datosPan['pans']=pan::paginate(5);
 
-        return view('pan.indexPan'.$datosPan);
+        return view('pan.indexPan',$datosPan);
     }
 
     /**
@@ -44,15 +45,15 @@ class PanController extends Controller
         $datosPan = request()->except('_token');
 
         if($request->hasFile('Foto')){
-
             $datosPan['Foto']=$request->file('Foto')->store('uploads','public');
         }
 
-        pan::insert($datosPan);
+        Pan::insert($datosPan);
 
+        
 
-
-        return response()->json($datosPan);
+        //return response()->json($datosPan);
+        return redirect('pan')->with('mensaje','Panesito agregado con éxito.');
     }
 
     /**
@@ -72,9 +73,11 @@ class PanController extends Controller
      * @param  \App\Models\pan  $pan
      * @return \Illuminate\Http\Response
      */
-    public function edit(pan $pan)
+    public function edit($id_Pan)
     {
         //
+        $pan=pan::findOrFail($id_Pan);
+        return view('pan.editPan',compact('pan'));
     }
 
     /**
@@ -84,9 +87,20 @@ class PanController extends Controller
      * @param  \App\Models\pan  $pan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, pan $pan)
+    public function update(Request $request, $id_Pan)
     {
         //
+        $datosPan = request()->except(['_token','_method']);
+
+        if($request->hasFile('Foto')){
+
+            $datosPan['Foto']=$request->file('Foto')->store('uploads','public');
+        }
+
+        Pan::where('id_Pan','=',$id_Pan)->update($datosPan);
+
+        $pan=Pan::findOrFail($id_Pan);
+        return view('pan.editPan', compact('pan'));
     }
 
     /**
@@ -98,7 +112,13 @@ class PanController extends Controller
     public function destroy($id)
     {
         //
-        pan::destroy($id);
-        return redirect('pan');
+        $pan=Pan::findOrFail($id);
+
+        if(Storage::delete('public/'.$pan->Foto)){
+            Pan::destroy($id);
+        }
+
+        
+        return redirect('pan')->with('mensaje','Panesito borrado, hehe.');
     }
 }

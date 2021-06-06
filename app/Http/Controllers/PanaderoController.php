@@ -42,8 +42,11 @@ class PanaderoController extends Controller
         //
         //$datosPanadero = request()->all();
         $datosPanadero = request()->except('_token');
-        panadero::insert($datosPanadero);
-        return response()->json($datosPanadero);
+
+        Panadero::insert($datosPanadero);
+
+        //return response()->json($datosPanadero);
+        return redirect('panadero')->with('mensaje','Panadero agregado con éxito.');
     }
 
     /**
@@ -63,10 +66,11 @@ class PanaderoController extends Controller
      * @param  \App\Models\panadero  $panadero
      * @return \Illuminate\Http\Response
      */
-    public function edit(panadero $panadero)
+    public function edit($id_Panadero)
     {
         //
-        
+        $panadero=panadero::findOrFail($id_Panadero);
+        return view('panadero.editPanadero', compact('panadero'));
     }
 
     /**
@@ -76,9 +80,11 @@ class PanaderoController extends Controller
      * @param  \App\Models\panadero  $panadero
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, panadero $panadero)
+    public function update(Request $request, $id_Panadero)
     {
         //
+        $datosPanadero = request()->except(['_token','_method']);
+        panadero::where('id_Panadero','=',$id_Panadero)->update($datosPanadero);
     }
 
     /**
@@ -91,6 +97,7 @@ class PanaderoController extends Controller
     {
         //
         panadero::destroy($id_Panadero);
-        return redirect('panadero');
+        return redirect('panadero')->with('mensaje','Panadero borrado, hehe.');
+
     }
 }
