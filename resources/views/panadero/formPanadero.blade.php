@@ -1,4 +1,4 @@
-
+<h1>{{$modo}} Panadero</h1>
 
 <label for="Nombre">Nombre</label>
 <input type="text" name="Nombre" value="{{isset($panadero->Nombre)?$panadero->Nombre:''}}" id="Nombre"><br>
@@ -24,7 +24,7 @@
 <label for="CodPostal">Código Postal</label>
 <input type="text" name="CodPostal"value="{{isset($panadero->CodPostal)?$panadero->CodPostal:''}}"id="CodPostal"><br>
 
-<input type="submit" value="{{$}} datos">
+<input type="submit" value="{{$modo}} datos">
 
 <a href="{{url('panadero')}}">Regresar</a>
 <br>

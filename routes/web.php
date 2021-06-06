@@ -35,3 +35,7 @@ Route::resource('panadero',PanaderoController::class);
 Route::resource('pan',PanController::class);
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

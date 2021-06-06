@@ -1,3 +1,5 @@
+<h1>{{$modo}} panesito</h1>
+
 <label for="Nombre">Nombre</label>
 <input type="text" name="Nombre" value="{{isset($pan->Nombre)?$pan->Nombre:''}}" id="Nombre"><br>
 
@@ -24,7 +26,7 @@
 <label for="Panadero_id">Panadero_id</label>
 <input type="text" name="Panadero_id"value="{{isset($pan->Panadero_id)?$pan->Panadero_id:''}}"id="Panadero_id"><br>
 
-<input type="submit" value="Guardar datos">
+<input type="submit" value="{{$modo}}  datos">
 
 <a href="{{url('pan')}}">Regresar</a>
 <br>
