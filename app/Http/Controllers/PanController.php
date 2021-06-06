@@ -107,6 +107,28 @@ class PanController extends Controller
     public function update(Request $request, $id_Pan)
     {
         //
+
+        $camposPan=[
+            'Nombre' => 'required|string|max:100',
+            'Ingredientes' => 'required|string|max:100',
+            'ClasePan' => 'required|string|max:100',
+            'Fechahecho' => 'required|string|max:100',
+            'Foto' => 'required|max:1000|mimes:jpeg,png,jpg',
+            'Coste' => 'required|email',
+            'Panadero_id' => 'required|string|max:100'
+            
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es un atributo',
+            
+        ];
+        if($request->hasFile('Foto')){
+            $campos=['Foto' => 'required|max:1000|mimes:jpeg,png,jpg'];
+            $mensaje=['Foto.required'=>'La foto es requerida'];
+        }
+        $this->validate($request, $campos, $mensaje);
+
+
         $datosPan = request()->except(['_token','_method']);
 
         if($request->hasFile('Foto')){
@@ -117,7 +139,8 @@ class PanController extends Controller
         Pan::where('id_Pan','=',$id_Pan)->update($datosPan);
 
         $pan=Pan::findOrFail($id_Pan);
-        return view('pan.editPan', compact('pan'));
+        //return view('pan.editPan', compact('pan'));
+        return redirect('pan')->with('mensaje','Panesito actualizado, hehe.');
     }
 
     /**

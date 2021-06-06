@@ -99,8 +99,31 @@ class PanaderoController extends Controller
     public function update(Request $request, $id_Panadero)
     {
         //
+
+        $camposPanadero=[
+            'Nombre' => 'required|string|max:100',
+            'Apellido' => 'required|string|max:100',
+            'Telefono' => 'required|string|max:100',
+            'DNI' => 'required|string|max:100',
+            'Movil' => 'required|string|max:100',
+            'Correo' => 'required|email',
+            'Direccion' => 'required|string|max:100',
+            'CodPostal' => 'required|string|max:100'
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es un atributo',
+            
+        ];
+        if($request->hasFile('Foto')){
+            $campos=['Foto' => 'required|max:1000|mimes:jpeg,png,jpg'];
+            $mensaje=['Foto.required'=>'La foto es requerida'];
+        }
+        $this->validate($request, $campos, $mensaje);
+
         $datosPanadero = request()->except(['_token','_method']);
         panadero::where('id_Panadero','=',$id_Panadero)->update($datosPanadero);
+
+        return redirect('panadero')->with('mensaje','Panadero actualizado, hehe.');
     }
 
     /**
