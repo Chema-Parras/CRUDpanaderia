@@ -15,7 +15,9 @@ class PanController extends Controller
     public function index()
     {
         //
-        return view('pan.indexPan');
+        $datosPan['pan']=pan::paginate(5);
+
+        return view('pan.indexPan'.$datosPan);
     }
 
     /**
@@ -39,6 +41,18 @@ class PanController extends Controller
     public function store(Request $request)
     {
         //
+        $datosPan = request()->except('_token');
+
+        if($request->hasFile('Foto')){
+
+            $datosPan['Foto']=$request->file('Foto')->store('uploads','public');
+        }
+
+        pan::insert($datosPan);
+
+
+
+        return response()->json($datosPan);
     }
 
     /**
@@ -81,8 +95,10 @@ class PanController extends Controller
      * @param  \App\Models\pan  $pan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(pan $pan)
+    public function destroy($id)
     {
         //
+        pan::destroy($id);
+        return redirect('pan');
     }
 }

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class pan extends Model
 {
     use HasFactory;
+    public function panaderos(){
+        return $this->hasMany(Panadero::class);
+    }
+    protected $primaryKey = 'id_Pan';
 }

@@ -31,5 +31,7 @@ Route::get('/', function () {
 // Route::get('/panadero/create',[PanaderoController::class.'create']);
 // Route::get('/pan/create',[PanController::class.'create']);
 
-Route::resource('panadero', PanaderoController::class);
-Route::resource('pan', PanController::class);
+Route::resource('panadero',PanaderoController::class);
+Route::resource('pan',PanController::class);
+
+

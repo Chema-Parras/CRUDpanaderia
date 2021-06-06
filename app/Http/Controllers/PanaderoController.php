@@ -15,7 +15,8 @@ class PanaderoController extends Controller
     public function index()
     {
         //
-        return view('panadero.indexPanadero');
+        $datosPanadero['panaderos']=panadero::paginate(5);
+        return view('panadero.indexPanadero',$datosPanadero);
     }
 
     /**
@@ -39,6 +40,10 @@ class PanaderoController extends Controller
     public function store(Request $request)
     {
         //
+        //$datosPanadero = request()->all();
+        $datosPanadero = request()->except('_token');
+        panadero::insert($datosPanadero);
+        return response()->json($datosPanadero);
     }
 
     /**
@@ -61,6 +66,7 @@ class PanaderoController extends Controller
     public function edit(panadero $panadero)
     {
         //
+        
     }
 
     /**
@@ -81,8 +87,10 @@ class PanaderoController extends Controller
      * @param  \App\Models\panadero  $panadero
      * @return \Illuminate\Http\Response
      */
-    public function destroy(panadero $panadero)
+    public function destroy($id_Panadero)
     {
         //
+        panadero::destroy($id_Panadero);
+        return redirect('panadero');
     }
 }
