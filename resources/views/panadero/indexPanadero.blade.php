@@ -1,7 +1,14 @@
-<a href="{{url('panadero/create')}}">Registrar nuevo panadero</a>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+
+
 @if(Session::has('mensaje'))
 {{Session::get('mensaje')}}
 @endif
+<a href="{{url('panadero/create')}}">Registrar nuevo panadero</a>
 
 <table class="table table-dark">
     <thead class="thead-dark">
@@ -55,3 +62,5 @@
         @endforeach
     </tbody>
 </table>
+</div>
+@endsection

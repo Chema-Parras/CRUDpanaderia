@@ -17,7 +17,7 @@ use App\Http\Controllers\PanController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Route::get('/panadero', function () {
@@ -38,4 +38,10 @@ Route::resource('pan',PanController::class);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [PanaderoController::class, 'index'])->name('home');
+
+Route::group(['middleware'=>'auth'],function () {
+
+    Route::get('/', [PanaderoController::class, 'indexPanadero'])->name('home');
+    
+});

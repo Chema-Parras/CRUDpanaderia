@@ -1,10 +1,16 @@
-<a href="{{url('pan/create')}}">Registrar nuevo Pan rico rico.</a>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+
 @if(Session::has('mensaje'))
 {{Session::get('mensaje')}}
 @endif
+<a href="{{url('pan/create')}}">Registrar nuevo Pan rico rico.</a>
 
-<table class="table table-light">
-    <thead class="thead-light">
+<table class="table table-dark">
+    <thead class="thead-dark">
         <tr>
             <th>#</th>
             <th>Nombre</th>
@@ -51,3 +57,5 @@
         @endforeach
     </tbody>
 </table>
+</div>
+@endsection
