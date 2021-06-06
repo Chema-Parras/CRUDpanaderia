@@ -42,6 +42,22 @@ class PanController extends Controller
     public function store(Request $request)
     {
         //
+        $camposPan=[
+            'Nombre' => 'required|string|max:100',
+            'Ingredientes' => 'required|string|max:100',
+            'ClasePan' => 'required|string|max:100',
+            'Fechahecho' => 'required|string|max:100',
+            'Foto' => 'required|max:1000|mimes:jpeg,png,jpg',
+            'Coste' => 'required|email',
+            'Panadero_id' => 'required|string|max:100'
+            
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es un atributo',
+            'Foto.required'=>'La foto es requerida'
+        ];
+
+
         $datosPan = request()->except('_token');
 
         if($request->hasFile('Foto')){

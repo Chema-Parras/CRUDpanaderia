@@ -40,7 +40,22 @@ class PanaderoController extends Controller
     public function store(Request $request)
     {
         //
-        //$datosPanadero = request()->all();
+        $camposPanadero=[
+            'Nombre' => 'required|string|max:100',
+            'Apellido' => 'required|string|max:100',
+            'Telefono' => 'required|string|max:100',
+            'DNI' => 'required|string|max:100',
+            'Movil' => 'required|string|max:100',
+            'Correo' => 'required|email',
+            'Direccion' => 'required|string|max:100',
+            'CodPostal' => 'required|string|max:100'
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es un atributo'
+            
+        ];
+
+
         $datosPanadero = request()->except('_token');
 
         Panadero::insert($datosPanadero);
