@@ -15,7 +15,7 @@ class PanaderoController extends Controller
     public function index()
     {
         //
-        $datosPanadero['panaderos']=panadero::paginate(5);
+        $datosPanadero['panaderos']=panadero::paginate(1);
         return view('panadero.indexPanadero',$datosPanadero);
     }
 
@@ -114,10 +114,7 @@ class PanaderoController extends Controller
             'required'=>'El :attribute es un atributo',
             
         ];
-        if($request->hasFile('Foto')){
-            $campos=['Foto' => 'required|max:1000|mimes:jpeg,png,jpg'];
-            $mensaje=['Foto.required'=>'La foto es requerida'];
-        }
+       
         $this->validate($request, $campos, $mensaje);
 
         $datosPanadero = request()->except(['_token','_method']);

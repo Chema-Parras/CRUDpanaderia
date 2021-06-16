@@ -16,7 +16,7 @@ class PanController extends Controller
     public function index()
     {
         //
-        $datosPan['pans']=pan::paginate(5);
+        $datosPan['pans']=pan::paginate(1);
 
         return view('pan.indexPan',$datosPan);
     }
